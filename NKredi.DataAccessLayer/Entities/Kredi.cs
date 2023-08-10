@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace NKredi.DataAccessLayer.Entities
 {
-    public class Bankalar
+    public class Kredi
     {
         public int Id { get; set; }
-        public string KisaAdi { get; set; }
-        public string Adi { get; set; }
+        public string Turu { get; set; }
     }
 }
