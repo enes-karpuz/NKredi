@@ -36,7 +36,7 @@ namespace NKredi.DataAccessLayer
             List<DovizCinsi> dovizCinsi = new List<DovizCinsi>();
             foreach (DataRow satir in dt.Rows)
             {
-                doviz.Add(new()
+                dovizCinsi.Add(new()
                 {
                     Id = Convert.ToInt32(satir["Id"]),
                     KisaAdi = (satir["KisaAdi"].ToString()),

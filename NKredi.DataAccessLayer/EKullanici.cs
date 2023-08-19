@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NKredi.DataAccessLayer.Entities;
+using System.Drawing;
 
 namespace NKredi.DataAccessLayer
 {
@@ -64,7 +65,7 @@ namespace NKredi.DataAccessLayer
             {
                 Id = Convert.ToInt32(dt.Rows[0]["Id"]),
                 Tipi = Convert.ToInt32(dt.Rows[0]["Tipi"]),
-                Ad = dt.Rows[0]["Isim"].ToString(),
+                Ad = dt.Rows[0]["Ad"].ToString(),
                 Soyad = dt.Rows[0]["Soyad"].ToString(),
                 email = dt.Rows[0]["email"].ToString(),
                 Sifre = dt.Rows[0]["Sifre"].ToString(),
@@ -79,7 +80,6 @@ namespace NKredi.DataAccessLayer
         {
             SqlCommand sqlCommand = new SqlCommand("EkleKullanici", sqlConnection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@p_Id", kullanici.Id);
             sqlCommand.Parameters.AddWithValue("@p_Tipi", kullanici.Tipi);
             sqlCommand.Parameters.AddWithValue("@p_Ad", kullanici.Ad);
             sqlCommand.Parameters.AddWithValue("@p_Soyad", kullanici.Soyad);
@@ -128,6 +128,28 @@ namespace NKredi.DataAccessLayer
                 return true;
             }
             return false;
+        }
+
+        public string ReadPasswordByEmail(string email)
+        {
+            SqlCommand sqlCommand = new SqlCommand("ReadByEmail", sqlConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@p_email", email);
+            database.OpenConnetion(sqlConnection);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+            DataTable dt = new DataTable();
+            database.OpenConnetion(sqlConnection);
+            sqlDataAdapter.Fill(dt);
+            if (sqlCommand.ExecuteNonQuery() == 1)
+            {
+                sqlConnection.Close();
+            }
+            string sifre = "";
+            if (dt.Rows.Count >0)
+            {
+                sifre = dt.Rows[0]["Sifre"].ToString();
+            }
+            return sifre;
         }
     }
 }

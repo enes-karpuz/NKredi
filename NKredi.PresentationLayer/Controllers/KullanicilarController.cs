@@ -17,11 +17,16 @@ namespace NKredi.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public bool EkleKullanici(Kullanici kullanici)
+        public string EkleKullanici(Kullanici kullanici)
         {
             SKullanici sKullanici = new SKullanici();
-            return sKullanici.EkleKullanici(kullanici);
+            if (sKullanici.EkleKullanici(kullanici))
+            {
+                return "Kayıt başarı ile oluşturuldu.";
+            }
+            return "Hata alındı,kayıt oluşturulamadı.";
         }
+
         [HttpPut]
         public bool GuncelleKullanici(Kullanici kullanici)
         {
@@ -29,12 +34,14 @@ namespace NKredi.PresentationLayer.Controllers
             sKullanici.EkleKullanici(kullanici);
             return true;
         }
+
         [HttpGet("Id")]
         public Kullanici OkuKullanici(int id)
         {
             SKullanici sKullanici = new SKullanici();
             return sKullanici.OkuKullanici(id);
         }
+
         [HttpDelete("Id")]
         public bool SilKullanici(int id)
         {

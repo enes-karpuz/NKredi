@@ -17,30 +17,92 @@ namespace Nkredi.BusinessLogicLayer
         public List<Kullanici> GetirKullaniciListesi()
         {
             EKullanici ekullanici = new EKullanici();
-            return ekullanici.GetirKullanici();
+            try
+            {
+                return ekullanici.GetirKullanici();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
         public bool EkleKullanici(Kullanici kullanici)
         {
             EKullanici ekullanici = new EKullanici();
-            ekullanici.EkleKullanici(kullanici);
-            return true;
+            SKullaniciTipi sKullaniciTipi = new SKullaniciTipi();
+            try
+            {
+                var kullaniciTipi = sKullaniciTipi.OkuKullaniciTipi(kullanici.Tipi);
+                if (kullaniciTipi.Id != 0)
+                {
+                    ekullanici.EkleKullanici(kullanici);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
+
         public Kullanici OkuKullanici(int id)
         {
             EKullanici ekullanici = new EKullanici();
-            return ekullanici.OkuKullanici(id);
+            try
+            {
+                return ekullanici.OkuKullanici(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
+
         public bool GuncelleKullanici(Kullanici kullanici)
         {
             EKullanici ekullanici = new EKullanici();
-            ekullanici.GuncelleKullanici(kullanici);
-            return true;
+            try
+            {
+                ekullanici.GuncelleKullanici(kullanici);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
+
         public bool SilKullanici(int id)
         {
             EKullanici ekullanici = new EKullanici();
-            ekullanici.SilKullanici(id);
-            return true;
+            try
+            {
+                ekullanici.SilKullanici(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
+        }
+
+        public string ReadPasswordByEmail(string email)
+        {
+            EKullanici eKullanici = new EKullanici();
+            return eKullanici.ReadPasswordByEmail(email);
+        }
+        public bool IsPasswordCorrect(Kullanici kullanici)
+        {
+            string kullaniciSifre = ReadPasswordByEmail(kullanici.email);
+            if (kullaniciSifre == kullanici.Sifre)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

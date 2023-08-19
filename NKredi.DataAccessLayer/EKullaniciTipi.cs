@@ -54,12 +54,15 @@ namespace NKredi.DataAccessLayer
             DataTable dt = new DataTable();
             database.OpenConnetion(sqlConnection);
             sqlDataAdapter.Fill(dt);
-
-            KullaniciTipi okunanKullaniciTipi = new KullaniciTipi()
+            KullaniciTipi okunanKullaniciTipi = new KullaniciTipi();
+            if (dt.Rows.Count > 0)
             {
-                Id = Convert.ToInt32(dt.Rows[0]["Id"]),
-                Tipi = (dt.Rows[0]["Tipi"].ToString())
-            };
+                okunanKullaniciTipi = new KullaniciTipi()
+                {
+                    Id = Convert.ToInt32(dt.Rows[0]["Id"]),
+                    Tipi = dt.Rows[0]["Tipi"].ToString()
+                };
+            }
             return okunanKullaniciTipi;
         }
 
@@ -68,7 +71,6 @@ namespace NKredi.DataAccessLayer
         {
             SqlCommand sqlCommand = new SqlCommand("EkleKullaniciTipi", sqlConnection);
             sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@p_Id", kullaniciTipi.Id);
             sqlCommand.Parameters.AddWithValue("@p_Tipi", kullaniciTipi.Tipi);
             database.OpenConnetion(sqlConnection);
             if (sqlCommand.ExecuteNonQuery() > 0)
