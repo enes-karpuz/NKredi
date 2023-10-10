@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using NKredi.DataAccessLayer.Entities;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NKredi.DataAccessLayer.Entities;
-using System.Drawing;
+using System.Data.SqlClient;
 
 namespace NKredi.DataAccessLayer
 {
@@ -39,13 +33,13 @@ namespace NKredi.DataAccessLayer
             {
                 kullanicilar.Add(new Kullanici()
                 {
-                    Id = Convert.ToInt32(satir["Id"]),
-                    Tipi = Convert.ToInt32(satir["Tipi"].ToString()),
+                    Id = satir["Id"] == DBNull.Value ? 0 : Convert.ToInt32(satir["Id"]),
+                    Tipi = satir["Tipi"] == DBNull.Value ? 0 : Convert.ToInt32(satir["Tipi"]),
                     Ad = satir["Ad"].ToString(),
                     Soyad = satir["Soyad"].ToString(),
                     email = satir["email"].ToString(),
                     Sifre = satir["Sifre"].ToString(),
-                    DogumTarihi = Convert.ToDateTime(satir["DogumTarihi"].ToString())
+                    DogumTarihi = satir["DogumTarihi"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(satir["DogumTarihi"])
                 });
             }
             return kullanicilar;
@@ -145,7 +139,7 @@ namespace NKredi.DataAccessLayer
                 sqlConnection.Close();
             }
             string sifre = "";
-            if (dt.Rows.Count >0)
+            if (dt.Rows.Count > 0)
             {
                 sifre = dt.Rows[0]["Sifre"].ToString();
             }
