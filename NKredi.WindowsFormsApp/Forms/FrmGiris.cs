@@ -1,18 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using Nkredi.BusinessLogicLayer;
-using NKredi.DataAccessLayer;
+﻿using Nkredi.BusinessLogicLayer;
 using NKredi.DataAccessLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NKredi.WindowsFormsApp.Forms
 {
@@ -25,12 +12,13 @@ namespace NKredi.WindowsFormsApp.Forms
 
         private void BtnGiris_Click(object sender, EventArgs e)
         {
+            TxtEPosta.Text = "enes@nkredi.com";
+            TxtSifre.Text = "123456";
             SKullanici kullaniciService = new SKullanici();
             FrmAnaMenu frmAnaMenu = new FrmAnaMenu();
             frmAnaMenu.Hide();
 
-            
-            if (kullaniciService.IsPasswordCorrect(new Kullanici(){ email = TxtEPosta.Text,Sifre = TxtSifre.Text}))
+            if (kullaniciService.IsPasswordCorrect(new Kullanici() { email = TxtEPosta.Text, Sifre = TxtSifre.Text }))
             {
                 FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa();
                 MessageBox.Show("Başarılı Giriş");
@@ -39,11 +27,10 @@ namespace NKredi.WindowsFormsApp.Forms
             }
             else
             {
-                MessageBox.Show("Email ve ya Şifre Hatalı!");
+                MessageBox.Show("Email veya Şifre Hatalı!");
                 Close();
                 frmAnaMenu.ShowDialog();
             }
-            
         }
     }
 }

@@ -21,5 +21,23 @@ namespace NKredi.WindowsFormsApp.Forms
         {
 
         }
+
+        private void btnBankalar_Click(object sender, EventArgs e)
+        {
+            FrmBankalar bankalar = new FrmBankalar();
+            bankalar.ShowDialog();
+        }
+
+        private void btnKullanici_Click(object sender, EventArgs e)
+        {
+            FrmKullanicilar kullanicilar = new FrmKullanicilar();
+            kullanicilar.ShowDialog();
+        }
+
+        private void btnKrediler_Click(object sender, EventArgs e)
+        {
+            FrmKrediler krediler = new FrmKrediler();
+            krediler.ShowDialog();
+        }
     }
 }

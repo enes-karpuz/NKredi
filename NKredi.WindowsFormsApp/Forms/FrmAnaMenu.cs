@@ -29,10 +29,5 @@ namespace NKredi.WindowsFormsApp
             FrmKayitOl frmKayitOl = new();
             frmKayitOl.ShowDialog();
         }
-
-        private void LblHosgeldiniz_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -64,7 +64,6 @@
             LblHosgeldiniz.Size = new Size(729, 62);
             LblHosgeldiniz.TabIndex = 2;
             LblHosgeldiniz.Text = "NKredi Uygulamasına Hoşgeldiniz";
-            LblHosgeldiniz.Click += LblHosgeldiniz_Click;
             // 
             // FrmAnaMenu
             // 

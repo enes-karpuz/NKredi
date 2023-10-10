@@ -1,14 +1,5 @@
 ﻿using Nkredi.BusinessLogicLayer;
 using NKredi.DataAccessLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NKredi.WindowsFormsApp.Forms
 {
@@ -28,7 +19,7 @@ namespace NKredi.WindowsFormsApp.Forms
         }
 
         private void BtnKaydet_Click(object sender, EventArgs e)
-        {
+        {            
             Kullanici kullanici = new()
             {
                 Tipi = CmbTipi.SelectedIndex,
