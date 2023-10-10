@@ -97,12 +97,18 @@ namespace Nkredi.BusinessLogicLayer
         }
         public bool IsPasswordCorrect(Kullanici kullanici)
         {
-            string kullaniciSifre = ReadPasswordByEmail(kullanici.email);
-            if (kullaniciSifre == kullanici.Sifre)
+            //string kullaniciSifre = ReadPasswordByEmail(kullanici.email);
+
+            //if (kullaniciSifre == kullanici.Sifre)
+            //{
+            //    return true;
+            //}
+            //return false;
+            if (ReadPasswordByEmail(kullanici.email) == null)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
     }
 }
